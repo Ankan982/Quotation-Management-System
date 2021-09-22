@@ -90,25 +90,41 @@ $Qnum = $_SESSION['Qnum'];
                             <div class="row ">
                                 <div class="col-xs-6">
                                     <address>
+
+                                    <?php
+                                   
+                                   $city = $row['BillToCity'];
+                                   $state = $row['BillToState'];
+                                   $zipcode= $row['BillToZip'];
+                                   $Country= $row['BillToCountry'];
+                                   $details_addrress= $city.", ".$state.", ".$zipcode ;
+
+
+                                      ?>
                                         <strong>ORDER TO:</strong><br>
                                         <?php echo $row['BillToName']  ?><br>
                                         <?php echo $row['BillToAddress']  ?><br>
-                                        <?php echo $row['BillToCity']  ?><br>
-                                        <?php echo $row['BillToState']  ?><br>
-                                        <?php echo $row['BillToZip']  ?><br>
+                                        <?php echo $details_addrress  ?><br>
+                                        <?php echo $Country  ?><br>
                                     </address>
                                 </div>
                                 <div class="col-xs-6">
+                                <?php 
+                                   $city = $row['ShipToCity'];
+                                   $state = $row['ShipToState'];
+                                   $zipcode= $row['ShipToZip'];
+                                   $ship_details_addrress= $city.", ".$state.", ".$zipcode ;
+                                   $Country= $row['ShipToCountry'];
+                                      ?>
                                     <address>
                                         <strong>SHIP TO:</strong><br>
                                         <?php echo $row['ShipToName']  ?><br>
                                         <?php echo $row['ShipToAddress']  ?><br>
-                                        <?php echo $row['ShipToCity']  ?><br>
-                                        <?php echo $row['ShipToState']  ?><br>
-                                        <?php echo $row['ShipToZip']  ?><br>
+                                        <?php echo $ship_details_addrress  ?><br>
+                                        <?php echo $Country  ?><br>
                                     </address>
                                 </div>
-                                <div class="col-xs-6">
+                                <div class="col-xs-6 ">
                                     <address>
                                         <strong>Contact Details:</strong><br>
                                         <?php echo $row['ContactName']  ?><br>
@@ -163,17 +179,15 @@ $Qnum = $_SESSION['Qnum'];
                                 <table class="table table-condensed">
                                     <thead>
                                         <tr>
-                                            <td><strong>Item</strong></td>
-                                            <td class="text-center"><strong>Part Number</strong></td>
+                                            <td><strong>Line</strong></td>
+                                            <td class="text-center"><strong></strong></td>
                                             <td class="text-center"><strong>Description</strong></td>
-                                            <td class="text-center"><strong>Brand</strong></td>
                                             <td class="text-center"><strong>Quantity</strong></td>
+                                            <td class="text-center"><strong>Brand</strong></td>
+                                            <td class="text-center"><strong>Unit Wt.(lbs)</strong></td>
+                                            <td class="text-center"><strong>Status</strong></td>
                                             <td class="text-center"><strong>Unit Price</strong></td>
-                                            <td class="text-center"><strong>Total </strong></td>
-                                           
-                                            <td class="text-center"><strong>Unit Weight</strong></td>
-                                           
-                                           
+                                            <td class="text-center"><strong>Total Price </strong></td>               
                                         
                                         </tr>
                                     </thead>
@@ -201,16 +215,15 @@ $Qnum = $_SESSION['Qnum'];
 
                                             <tr>
                                                 <td><?php echo $id ?></td>
-                                                <td class="text-center"><?php echo $row['part_number']  ?></td>
+                                                <td class="text-center"></td>
                                                 <td class="text-center"><?php echo $row['description']  ?></td>
-                                                <td class="text-center"><?php echo $row['brand']  ?></td>
                                                 <td class="text-center"><?php echo $row['qty']  ?></td>
+                                                <td class="text-center"><?php echo $row['brand']  ?></td>
+                                                <td class="text-center"><?php echo number_format($row['weight'], 2)  ?></td>
+                                                <td class="text-center"></td>
                                                 <td class="text-center"><?php echo number_format($row['unit_price'], 2)  ?></td> 
                                                 <td class="text-center"><?php echo number_format($row['price'], 2) ?></td>
-                                                <td class="text-center"><?php echo number_format($row['weight'], 2)  ?></td>
-                                        
-                                               
-                                               
+                                                        
                                             </tr>
                                         <?php
 
@@ -220,19 +233,20 @@ $Qnum = $_SESSION['Qnum'];
                                             $total_weight += ($row['qty'] * $row['weight']);
                                         }
                                         ?>
-                                        <tr>
-                                            <td class="thick-line" colspan="5"></td>
+                                    
+                                    <tr height = 50px></tr>
+                                        <tr >
+                                            <td class="thick-line" colspan="2"></td>
                                             <td class="thick-line"></td>
                                             <td class="thick-line text-center"><strong>Total weight</strong></td>
                                             <td class="thick-line text-center"><?php echo $total_weight   ?></td>
-                                        </tr>
-                            
-                                        <tr>
-                                            <td class="no-line" colspan="5"></td>
-                                            <td class="no-line"></td>
+                                            <td class="thick-line"></td>
+                                            <td class="thick-line" colspan="1"></td>
                                             <td class="no-line text-center"><strong>Total Price</strong></td>
                                             <td class="no-line text-center"><?php echo '$' . $total_price  ?></td>
                                         </tr>
+                            
+                                   
 
                                     </tbody>
                                 </table>

@@ -22,9 +22,18 @@ if (!empty($_GET["action"])) {
                 $query_run = mysqli_query($conn, $query);
                 $check = mysqli_num_rows($query_run) > 0;
 
-                $rows = mysqli_fetch_array($query_run);
+                if ($check > 0) {
+                    $rows = mysqli_fetch_array($query_run);
+                } else {
+                    $query = "SELECT * FROM `KM_tbl` WHERE part_number='$partnumber'";
+                    $query_run = mysqli_query($conn, $query);
+                    $rows = mysqli_fetch_array($query_run);
+                    // $check = mysqli_num_rows($query_run) > 0;
+                }
 
-                //  print_r(gettype(floatval($rows['price'])));
+                 
+
+                //     print_r(gettype(floatval($rows['price'])));
 
 
 
@@ -226,7 +235,7 @@ if (!empty($_GET["action"])) {
 
 
 
-    <!-- <div class="d-flex flex-row-reverse mr-2">
+    <!--<div class="d-flex flex-row-reverse mr-2">
         <a id="btnEmpty" href="cart.php?action=empty"><button class="btn btn-danger me-2 ">Clear Quote</button></a>
     </div>-->
 
@@ -239,20 +248,20 @@ if (!empty($_GET["action"])) {
     ?>
         <div class="container d-flex justify-content-center mt-2">
 
-            <table class="table table-bordered" id="tbUser">
+            <table class="table table-bordered mt-3" id="tbUser">
                 <tbody>
                     <thead class="table-dark">
                         <tr>
                             <!--   <th>Serial Number</th>-->
-                            <th>Part Number</th>
-                            <th>Description</th>
-                            <th>Brand</th>
-                            <th>Quantity</th>
-                            <th>Unit Price</th>
-                            <th>Total </th>
-                            <th>Status</th>
-                            <th>Unit Weight</th>
-                            <th>Remove</th>
+                            <!--  <th>Part Number</th>-->
+                            <th style="text-align:center;">Description</th>
+                            <th style="text-align:center;">Brand</th>
+                            <th style="text-align:center;">Quantity</th>
+                            <th style="text-align:center;">Unit Price</th>
+                            <th style="text-align:center;">Total </th>
+                            <th style="text-align:center;">Status</th>
+                            <th style="text-align:center;">Unit Wt.(lbs)</th>
+                            <th style="text-align:center;">Remove</th>
                         </tr>
                     </thead>
 
@@ -278,14 +287,14 @@ if (!empty($_GET["action"])) {
                     ?>
                         <tr>
                             <!-- <td align="center"><?php /* echo $id */ ?></td>-->
-                            <td align="center"><?php echo $item["part_number"]; ?></td>
-                            <td><?php echo $item["description"]; ?></td>
-                            <td><?php echo $item["brand"]; ?></td>
-                            <td><?php echo $item["quantity"]; ?></td>
-                            <td><?php echo "$" . $curent_unit_price ?></td>
-                            <td><?php echo "$" . $item_price; ?></td>
-                            <td></td>
-                            <td><?php echo $unit_weight ?></td>
+                            <!-- <td align="center"><?php echo $item["part_number"]; ?></td>-->
+                            <td style="text-align:center;"><?php echo $item["description"]; ?></td>
+                            <td style="text-align:center;"><?php echo $item["brand"]; ?></td>
+                            <td style="text-align:center;"><?php echo $item["quantity"]; ?></td>
+                            <td style="text-align:center;"><?php echo "$" . $curent_unit_price ?></td>
+                            <td style="text-align:center;"><?php echo "$" . $item_price; ?></td>
+                            <td style="text-align:center;"></td>
+                            <td style="text-align:center;"><?php echo $unit_weight ?></td>
                             <td style="text-align:center;"><a href="cart.php?action=remove&code=<?php echo $id - 1; ?>" class="btnRemoveAction"><img src="icon-delete.png" alt="Remove Item" /></a></td>
                         </tr>
 
@@ -305,18 +314,18 @@ if (!empty($_GET["action"])) {
                         <td></td>
                     </tr>-->
                     <tr>
-                        <td colspan="3" align="right"><b>Total Weight: </b></td>
-                        <td align="left"><b><?php echo $total_weight; ?></b></td>
+                        <td colspan="4" align="center"><b>Total Weight: </b></td>
+                        <td align="center"><b><?php echo $total_weight; ?></b></td>
                         <td align="left"></td>
 
                         <td></td>
                     </tr>
-                    <td colspan="3" align="right"><b>Total Price: </b></td>
-                    <td align="left"><b><?php echo "$ " . number_format($total_price, 2); ?></b></td>
+                    <tr>
+                    <td colspan="4" align="center"><b>Total Price: </b></td>
+                    <td align="center"><b><?php echo "$ " . number_format($total_price, 2); ?></b></td>
                     <td align="left"></td>
                     <tr>
 
-                    </tr>
                 </tbody>
             </table>
 

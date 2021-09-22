@@ -39,14 +39,14 @@ ob_start();
 					<h5>Bill To</h5>
 					<div class="input-group">
 						<span class="input-group-text">Name</span>
-						<input type="text" name="BillToName" class="form-control">
+						<input type="text" name="BillToName" class="form-control" >
 					</div>
 				</div>
 				<div class="col">
 					<h5>Ship To</h5>
 					<div class="input-group">
 						<span class="input-group-text">Name</span>
-						<input type="text" name="ShipToName" class="form-control">
+						<input type="text" name="ShipToName" class="form-control" >
 					</div>
 				</div>
 			</div>
@@ -56,6 +56,12 @@ ob_start();
 						<label for="colFormLabel" class="col-sm-2 col-form-label">Address</label>
 						<div class="col-sm-10">
 							<input type="text" class="form-control" name="BillToAddress" placeholder="address">
+						</div>
+					</div>
+					<div class="row mb-3">
+						<label for="colFormLabel" class="col-sm-2 col-form-label">Country</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="BillToCountry" placeholder="Country..">
 						</div>
 					</div>
 					<div class="row mb-3">
@@ -82,6 +88,12 @@ ob_start();
 						<label for="colFormLabel" class="col-sm-2 col-form-label">Address</label>
 						<div class="col-sm-10">
 							<input type="text" class="form-control" name="ShipToAddress" placeholder="address">
+						</div>
+					</div>
+					<div class="row mb-3">
+						<label for="colFormLabel" class="col-sm-2 col-form-label">Country</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="ShipToCountry" placeholder="Country..">
 						</div>
 					</div>
 					<div class="row mb-3">
@@ -200,11 +212,13 @@ if (isset($_POST['submit'])) {
 	$ShipToName = $_POST['ShipToName'];
 
 	$BillToAddress = $_POST['BillToAddress'];
+	$BillToCountry = $_POST['BillToCountry'];
 	$BillToCity = $_POST['BillToCity'];
 	$BillToState = $_POST['BillToState'];
 	$BillToZip = $_POST['BillToZip'];
 
 	$ShipToAddress = $_POST['ShipToAddress'];
+	$ShipToCountry = $_POST['ShipToCountry'];
 	$ShipToCity = $_POST['ShipToCity'];
 	$ShipToState = $_POST['ShipToState'];
 	$ShipToZip = $_POST['ShipToZip'];
@@ -222,13 +236,13 @@ if (isset($_POST['submit'])) {
 	 `ShipToName`, `ShipToAddress`, `ContactName`, 
 	 `Email`, `Phone`, `SalesPerson`, `SalesEmail`,
 	  `BillToCity`, `BillToZip`, `ShipToCity`, `ShipToState`,
-	   `ShipToZip`, `BillToState`)
+	   `ShipToZip`, `BillToState`, `BillToCountry`,`ShipToCountry`)
 	 VALUES
 	  ('$Qnum','$BillToName','$BillToAddress',
 	  '$ShipToName','$ShipToAddress','$ContactName',
 	  '$Email','$Phone','$SalesPerson','$SalesEmail',
 	  '$BillToCity', '$BillToZip','$ShipToCity','$ShipToState',
-	  '$ShipToZip','$BillToState')";
+	  '$ShipToZip','$BillToState','$BillToCountry', '$ShipToCountry')";
 
 	$data = mysqli_query($conn, $query);
 	if ($data) {
